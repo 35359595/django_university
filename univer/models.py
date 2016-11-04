@@ -10,14 +10,14 @@ class University(models.Model):
 
 class Cathedra(models.Model):
     c_name = models.CharField(max_length=200)
-    c_univer = models.ForeignKey(University, null=True)
+    c_univer = models.ForeignKey(University, default=None)
 
     def __str__(self):
         return self.c_name
 
 class Disciplin(models.Model):
     d_name = models.CharField(max_length=200)
-    d_cathedra = models.ForeignKey(Cathedra)
+    d_cathedra = models.ForeignKey(Cathedra, default=None)
 
     def __str__(self):
         return self.d_name + " is lectured on " + self.d_cathedra
@@ -35,10 +35,10 @@ class Student(models.Model):
     s_las_name = models.CharField(max_length=35)
     s_email = models.EmailField(max_length=254)
     s_phone = models.PositiveIntegerField()
-    s_university = models.ForeignKey(University)
-    s_cathedra = models.ForeignKey(Cathedra)
-    s_disciplins = models.ForeignKey(Disciplin)
-    s_ht = models.ForeignKey(HomeTask)
+    s_university = models.ForeignKey(University, default=None)
+    s_cathedra = models.ForeignKey(Cathedra, default=None)
+    s_disciplins = models.ForeignKey(Disciplin, default=None)
+    s_ht = models.ForeignKey(HomeTask, default=None)
 
     def __str__(self):
         return self.s_name + " studiing " + self.s_cathedra + " in " + self.s_university
@@ -46,9 +46,9 @@ class Student(models.Model):
 class Lector(models.Model):
     l_name = models.CharField(max_length=20)
     l_las_name = models.CharField(max_length=35)
-    l_students = models.ForeignKey(Student)
-    l_univer = models.ForeignKey(University, null=True)
-    l_cathedra = models.ForeignKey(Cathedra, null=True)
+    l_students = models.ForeignKey(Student, default=None)
+    l_univer = models.ForeignKey(University, default=None)
+    l_cathedra = models.ForeignKey(Cathedra,default=None)
 
     def __str__(self):
         return self.l_name + " teaching at " + self.l_univer
