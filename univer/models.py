@@ -9,18 +9,18 @@ class University(models.Model):
         return self.u_name + " of " + self.u_city
 
 class Cathedra(models.Model):
-    c_name = models.CharField(max_length=200)
-    c_univer = models.ForeignKey(University, default=None)
+    cat_name = models.CharField(max_length=200)
+    cat_univer = models.ForeignKey(University, default=None)
 
     def __str__(self):
-        return self.c_name
+        return self.cat_name
 
 class Disciplin(models.Model):
     d_name = models.CharField(max_length=200)
     d_cathedra = models.ForeignKey(Cathedra, default=None)
 
     def __str__(self):
-        return self.d_name + " is lectured on " + self.d_cathedra
+        return self.d_name
 
 class HomeTask(models.Model):
     ht_name = models.CharField(max_length=200)
@@ -41,7 +41,7 @@ class Student(models.Model):
     s_ht = models.ForeignKey(HomeTask, default=None)
 
     def __str__(self):
-        return self.s_name + " studiing " + self.s_cathedra + " in " + self.s_university
+        return self.s_name + " " + self.s_las_name
 
 class Lector(models.Model):
     l_name = models.CharField(max_length=20)
@@ -51,4 +51,4 @@ class Lector(models.Model):
     l_cathedra = models.ForeignKey(Cathedra,default=None)
 
     def __str__(self):
-        return self.l_name + " teaching at " + self.l_univer
+        return self.l_name + " " + self.l_las_name
