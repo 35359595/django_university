@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>List of students at {{ students_list.s_university }}.</title>
+        <title>List of students.</title>
     </head>
 
     <body>
@@ -10,11 +10,13 @@
                 Універ БД!
             </td>
             <td>
-                <a href="./">Головна</a>
+                <a href="/">Головна</a>
             </td>
             <td>
                 <a href="/univers">Університети</a>
             </td>
+            <td>
+                <a href="/students">Студенти</a>
             <td>
                 <a href="/search">Пошук</a>
             </td>
@@ -34,7 +36,25 @@
                     {% endfor %}
                     </ul>
                 {% else %}
-                    <p>No students are available.</p>
+                    {% if univers_list %}
+                        <ul>
+                        {% for univer in univers_list %}
+                            <li><a href="/u/{{ univer.id }}">{{ univer }}</a></li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        {% if stud_personal %}
+                            <b>{{ stud_personal.s_name }} {{ stud_personal.s_las_name }}</b><br>
+                            {{ stud_personal.s_university }}<br>
+                            {{ stud_personal.s_cathedra }}<br>
+                            {{ stud_personal.s_disciplins}}<br>
+                            {{ stud_personal.s_phone }}<br>
+                            {{ stud_personal.s_email }}
+                        {% else %}
+                            <p><b>Ласкаво просимо!</b></p>
+                            Оберіть опцію з меню.
+                        {% endif %}
+                    {% endif %}
                 {% endif %}
             </td>
         </table>

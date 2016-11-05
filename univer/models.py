@@ -13,7 +13,7 @@ class Cathedra(models.Model):
     c_univer = models.ForeignKey(University, default=None)
 
     def __str__(self):
-        return self.cat_name
+        return self.c_name
 
 class Disciplin(models.Model):
     d_name = models.CharField(max_length=200)
