@@ -2,15 +2,15 @@ from django.db import models
 
 class University(models.Model):
     u_name = models.CharField(max_length=200)
-    u_city = models.CharField(max_length=200)
+    u_city = models.CharField(max_length=50)
     u_uri = models.URLField(max_length=200)
 
     def __str__(self):
         return self.u_name + " of " + self.u_city
 
 class Cathedra(models.Model):
-    cat_name = models.CharField(max_length=200)
-    cat_univer = models.ForeignKey(University, default=None)
+    c_name = models.CharField(max_length=200)
+    c_univer = models.ForeignKey(University, default=None)
 
     def __str__(self):
         return self.cat_name
