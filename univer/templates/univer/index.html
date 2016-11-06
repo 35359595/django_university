@@ -17,11 +17,16 @@
             </td>
             <td>
                 <a href="/students">Студенти</a>
-            <td>
-                <a href="/search">Пошук</a>
             </td>
             <td>
                 <a href="/add">Додати</a>
+            </td>
+            <td>
+                <form name="search_f" valign="bottom" action="/search/">
+                   <input type="text" name="search_box" formmethod="GET" valign="bottom" value="Пошук..." 
+                        onblur="if (this.value == '') {this.value = 'Пошук...';}"
+                        onfocus="if (this.value == 'Пошук...') {this.value = '';}"/>
+                </form>
             </td>
         </table>
 <br>
@@ -35,26 +40,32 @@
                         <li><a href="/{{ student.id }}/">{{ student }}</a></li>
                     {% endfor %}
                     </ul>
-                {% else %}
-                    {% if univers_list %}
-                        <ul>
-                        {% for univer in univers_list %}
-                            <li><a href="/u/{{ univer.id }}">{{ univer }}</a></li>
+                {% elif univers_list %}
+                    <ul>
+                    {% for univer in univers_list %}
+                        <li><a href="/u/{{ univer.id }}">{{ univer }}</a></li>
+                    {% endfor %}
+                    </ul>
+                {% elif stud_personal %}
+                    <b>{{ stud_personal.s_name }} {{ stud_personal.s_las_name }}</b><br>
+                    Навчається у {{ stud_personal.s_university }}<br>
+                    На кафедрі {{ stud_personal.s_cathedra }}<br>
+                    Вивчає {{ stud_personal.s_disciplins}}<br>
+                    Телефон: {{ stud_personal.s_phone }}<br>
+                    E-mail: <a href=mailto:{{ stud_personal.s_email }}>{{ stud_personal.s_email}}</a>
+                {% elif search_form %}
+                    {% if search_form != None %}
+                        {% for student in search_form.iterator %}
+                            <li><a href="/{{ student.id }}/">{{ student }}</a></li>
                         {% endfor %}
-                        </ul>
                     {% else %}
-                        {% if stud_personal %}
-                            <b>{{ stud_personal.s_name }} {{ stud_personal.s_las_name }}</b><br>
-                            {{ stud_personal.s_university }}<br>
-                            {{ stud_personal.s_cathedra }}<br>
-                            {{ stud_personal.s_disciplins}}<br>
-                            {{ stud_personal.s_phone }}<br>
-                            {{ stud_personal.s_email }}
-                        {% else %}
-                            <p><b>Ласкаво просимо!</b></p>
-                            Оберіть опцію з меню.
-                        {% endif %}
+                        <b>Нічого не знайдено.</b>
                     {% endif %}
+                {% elif add_form %}
+                    {{ add_form }}
+                {% else %}
+                    <p><b>Ласкаво просимо!</b></p>
+                    Оберіть опцію з меню.
                 {% endif %}
             </td>
         </table>
