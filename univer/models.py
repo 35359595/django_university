@@ -37,8 +37,8 @@ class Student(models.Model):
     s_phone = models.PositiveIntegerField()
     s_university = models.ForeignKey(University, default=None)
     s_cathedra = models.ForeignKey(Cathedra, default=None)
-    s_disciplins = models.ForeignKey(Disciplin, default=None)
-    s_ht = models.ForeignKey(HomeTask, default=None)
+    s_disciplins = models.ForeignKey(Disciplin, related_name='disciplins', default=None)
+    s_ht = models.ForeignKey(HomeTask, related_name='hometasks', default=None)
 
     def __str__(self):
         return self.s_name + " " + self.s_las_name
@@ -46,9 +46,9 @@ class Student(models.Model):
 class Lector(models.Model):
     l_name = models.CharField(max_length=20)
     l_las_name = models.CharField(max_length=35)
-    l_students = models.ForeignKey(Student, default=None)
-    l_univer = models.ForeignKey(University, default=None)
-    l_cathedra = models.ForeignKey(Cathedra,default=None)
+    l_students = models.ForeignKey(Student, related_name='students', default=None)
+    l_univer = models.ForeignKey(University, related_name='universities', default=None)
+    l_cathedra = models.ForeignKey(Cathedra, related_name='cathedras', default=None)
 
     def __str__(self):
         return self.l_name + " " + self.l_las_name
