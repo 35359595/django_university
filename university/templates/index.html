@@ -1,0 +1,61 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>ДБ</title>
+    </head>
+
+    <body ng-app="univer.frontend">
+        
+<!--Header menu-->
+        <table width="80%" height="5%" align="center" valign="top">
+            <td>
+                Універ БД!
+            </td>
+            <td>
+                <a href="#/">Головна</a>
+            </td>
+            <td>
+                <a href="/univers">Університети</a>
+            </td>
+            <td>
+                <a href="#/students/">Студенти</a>
+            </td>
+            <td>
+                <a href="/add">Додати</a>
+            </td>
+            <td>
+                <form name="search_f" valign="bottom" action="/search/">
+                   <input type="text" name="search_box" formmethod="GET" valign="bottom" value="Пошук..." 
+                        onblur="if (this.value == '') {this.value = 'Пошук...';}"
+                        onfocus="if (this.value == 'Пошук...') {this.value = '';}"/>
+                </form>
+            </td>
+            <td>
+                <div>
+                    <button ng-click="logout()">Logout</button>
+                </div>
+            </td>
+        </table>
+<br>
+
+<!--Main body renderer part-->
+                <ng-view></ng-view><br>
+
+<!--scripts-->
+<script src="{% static "js/angular.min.js" %}"></script>
+<script src="{% static "js/angular-route.js" %}"></script>
+<script src="{% static "js/univer.js" %}"></script>
+<script src="{% static "js/univer.config.js" %}"></script>
+<script src="{% static "js/student.directive.js" %}"></script> 
+
+
+<!--Footer-->
+
+        <table valign="bottom" align="center" height="5%">
+            <td>
+                Copyright (C) <a href="https://github.com/35359595/django_university">Ivan Temchenko</a> 2016.
+            </td>
+        </table>
+
+    </body>
+</html>

@@ -1,0 +1,8 @@
+<div ng-click="s_details=!s_details">
+    <a href="" title="Click for details">{{ student.s_name + " " + student.s_las_name }}</a>
+</div>
+<div ng-show="s_details">
+    {{ student.s_email }}<br>
+    {{ student.s_phone }}<br>
+    <button ng-click="delete()">Remove student</button>
+</div>
